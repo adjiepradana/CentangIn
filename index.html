@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CentangIn - Modern Todo</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>Centang<b>In</b></h1>
+            <p>"Satu Centang, Selangkah Lebih Dekat dengan Impianmu."</p>
+        </div>
+        
+        <div class="input-group">
+            <label for="taskInput">Tugas Baru</label>
+            <div class="input-wrapper">
+                <input type="text" id="taskInput" placeholder="Apa rencanamu hari ini?">
+                <button onclick="tambahTugas()" title="Tambah Tugas">➕</button>
+            </div>
+        </div>
+
+        <ul id="taskList"></ul>
+    </div>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
