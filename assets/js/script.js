@@ -1,33 +1,64 @@
-let dataTugas = [];
+const hamburgerBtn = document.getElementById('hamburgerBtn')
+const navLinks = document.getElementById('navLinks')
 
-const renderTugas = () => {
-    const listElement = document.getElementById("taskList");
+hamburgerBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active')
+})
+
+let taskData = []
+
+const taskRender = () => {
+    const listElement = document.getElementById('taskList')
     listElement.innerHTML = "";
 
-    dataTugas.forEach((tugas, index) => {
-        const li = document.createElement("li");
+    taskData.forEach((task, index) => {
+        const li = document.createElement('li')
+        li.className = 'todo-item'
         li.innerHTML = `
-        <span>${tugas}</span>
-        <button onclick="hapusTugas(${index})">➖</button>`;
-        listElement.appendChild(li);
-    });
-};
+        <span class"todo-text">${task}</span>
+        <button class="btn-delete" onclick="deleteTask(${index})" title="Hapus Tugas">
+        <i data-lucide="trash-2"></i>
+        </button>`
+        listElement.appendChild(li)
 
-const tambahTugas = () => {
-    const input = document.getElementById("taskInput");
+        if(typeof lucide !== 'undefined') {
+            lucide.createIcons()
+        }
+    })
+}
 
+const addTask = () => {
+    const input = document.getElementById('taskInput')
+    
     if(input.value.trim() !== "") {
-        dataTugas.push(input.value);
+        taskData.push(input.value)
         input.value = "";
-        renderTugas();
+        taskRender();
     } else {
-        alert("Isi tugas terlebih dahulu");
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Tambah tugas terlebih dahulu!',
+            confirmButtonColor: '#4A90E2'
+        })
     }
-};
+}
 
-const hapusTugas = (index) => {
-    dataTugas.splice(index, 1);
-    renderTugas();
-};
+const deleteTask = (index) => {
+    const todoItems = document.querySelectorAll('.todo-item')
+    const targetItem = todoItems[index]
 
-renderTugas();
+    if(targetItem) {
+        targetItem.style.opacity = '0'
+        targetItem.style.transition = 'translateY(-10px)'
+        targetItem.style.transition = 'all 0.2s ease-in-out'
+
+        setTimeout(() => {
+            taskData.splice(index,1)
+            taskRender()
+        }, 200);
+    }
+    taskRender();
+}
+
+taskRender();
