@@ -276,9 +276,27 @@ nav ul li:hover, nav ul li.active {
     }
 
     .container-content {
-        padding: 30px 20px;
-        margin: 30px auto;
-        width: 90%;
+        padding: 24px 16px;
+        margin: 20px auto;
+        width: 92%;
+    }
+
+    .input-wrapper {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .input-wrapper input {
+        padding: 12px 14px;
+        font-size: 13px;
+        min-width: 0;
+    }
+
+    .btn-tambah {
+        padding: 0 14px;
+        flex: shrink;
     }
 
     .title h1 {
