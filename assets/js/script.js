@@ -12,7 +12,7 @@ document.querySelectorAll('.nav-links ul li').forEach(item => {
     })
 })
 
-let taskData = ['Belajar Javascript']
+let taskData = [{text: 'Belajar Javascript', completed: false}]
 
 const taskRender = () => {
     const listElement = document.getElementById('taskList')
@@ -20,12 +20,15 @@ const taskRender = () => {
 
     taskData.forEach((task, index) => {
         const li = document.createElement('li')
-        li.classList = 'todo-item'
+        li.className = `todo-item ${task.completed ? 'completed' : ''}`
+        const iconCheck = task.completed ? 'check-circle-2' : 'circle'
+
         li.innerHTML = `
-        <span class="todo-text">${task}</span>
-        <button class="btn-delete" onclick="deleteTask(${index})" title="Hapus Tugas">
-            <i data-lucide="trash-2"></i>
-        </button>`
+        <div class="todo-left" onclick="toggleTask(${index})">
+        <button class="btn-check"><i data-lucide="${iconCheck}"></i></button>
+                <span class="todo-text">${task.text}</span>
+        </div>
+        <button class="btn-delete" onclick="deleteTask(${index})" title="Hapus Tugas"><i data-lucide="trash-2"></i></button>`
         listElement.appendChild(li)
     })
 
@@ -38,32 +41,37 @@ const addTask = () => {
     const input = document.getElementById('taskInput')
 
     if(input.value.trim() !== "") {
-        taskData.push(input.value)
-        input.value = ""
-        taskRender()
+        taskData.push({text: input.value, completed: false})
+        input.value = "";
+        taskRender();
     } else {
         Swal.fire({
             icon: 'warning',
             title: 'Oops...',
             text: 'Tambah tugas terlebih dahulu',
-            confirmButtonColor: '#4a90e2'
+            confirmButtonColor:  '#4a90e2'
         })
     }
+}
+
+const toggleTask = (index) => {
+    taskData[index].completed = !taskData[index].completed
+    taskRender()
 }
 
 const deleteTask = (index) => {
     const todoItems = document.querySelectorAll('.todo-item')
     const targetItem = todoItems[index]
-    
+
     if(targetItem) {
         targetItem.style.opacity = '0'
         targetItem.style.transform = 'translateY(10px)'
-        
+
         setTimeout(() => {
             taskData.splice(index, 1)
-            taskRender() 
-        }, 300); 
+            taskRender()
+        }, 300)
     }
 }
 
-taskRender();
+taskRender()

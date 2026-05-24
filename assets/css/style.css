@@ -303,3 +303,40 @@ nav ul li:hover, nav ul li.active {
         font-size: 26px;
     }
 }
+
+/* Completed Task */
+.todo-item.completed {
+    background: rgba(255, 255, 255, 0.4);
+    border-color: rgba(226, 232, 240, 0.4);
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: #94A3B8;
+    font-style: italic;
+}
+
+.btn-check {
+    background: transparent;
+    color: #94A3B8;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    transition: all 0.2s ease;
+}
+
+.todo-item.completed .btn-check {
+    color: #10B981; 
+}
+
+.todo-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+    cursor: pointer; 
+}
