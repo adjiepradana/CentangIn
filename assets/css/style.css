@@ -83,7 +83,7 @@ nav ul li:hover, nav ul li.active {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.4);
     border-radius: 24px;
-    max-width: 600px;
+    max-width: 1200px;
     width: 90%;
     box-shadow: 0 10px 32px 0 rgba(31,38,135,0.15);
     margin: 40px auto;
@@ -184,7 +184,8 @@ nav ul li:hover, nav ul li.active {
     align-items: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(226, 232, 240, 0.8);
-    animation: fadeIn 0.3s ease-in-out;
+animation: fadeIn 0.3s ease-in-out;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 @keyframes fadeIn {

@@ -16,14 +16,14 @@ let taskData = [{text: 'Belajar Javascript', completed: true}]
 
 const taskRender = () => {
     const listElement = document.getElementById('taskList')
-    listElement.innerHTML = ""
+    listElement.innerHTML = "";
 
     taskData.forEach((task, index) => {
         const li = document.createElement('li')
         li.className = /*html*/`
             todo-item ${task.completed ? 'completed' : ''}
         `
-        const iconCheck = task.completed ? 'check-circle-2' : 'circle'
+        const iconCheck = task.completed? 'check-circle-2' : 'circle'
 
         li.innerHTML = /*html*/`
             <div class="todo-left" onclick="toggleTask(${index})">
@@ -32,6 +32,7 @@ const taskRender = () => {
             </div>
             <button class="btn-delete" onclick="deleteTask(${index})" title="Hapus Tugas"><i data-lucide="trash-2"></i></button>
         `
+
         listElement.appendChild(li)
     })
 
@@ -41,14 +42,13 @@ const taskRender = () => {
 }
 
 const addTask = () => {
-    const input = document.getElementById('taskInput') 
+    const input = document.getElementById('taskInput')
 
     if(input.value.trim() !== "") {
         taskData.push({text: input.value, completed: false})
         input.value = "";
-        taskRender()
-    }
-    else {
+        taskRender();
+    } else {
         Swal.fire({
             icon: 'warning',
             title: 'Oops...',
@@ -69,7 +69,7 @@ const deleteTask = (index) => {
 
     if(targetItem) {
         targetItem.style.opacity = '0'
-        targetItem.style.transform = 'translateY(10px)'
+        targetItem.style.transform = 'translateX(50px)'
         setTimeout(() => {
             taskData.splice(index, 1)
             taskRender()
