@@ -11,8 +11,14 @@ document.querySelectorAll('.nav-links ul li').forEach(item => {
     })
 })
 
-// Main 
+
+// main
 let taskData = [{text: 'Belajar Javascript', completed: true}]
+
+// save data to local storage
+const saveToLocalStorage = () => {
+    localStorage.setItem('centangin_tasks', JSON.stringify(taskData)) 
+}
 
 const taskRender = () => {
     const listElement = document.getElementById('taskList')
@@ -23,7 +29,7 @@ const taskRender = () => {
         li.className = /*html*/`
             todo-item ${task.completed ? 'completed' : ''}
         `
-        const iconCheck = task.completed? 'check-circle-2' : 'circle'
+        const iconCheck = task.completed ? 'check-circle-2' : 'circle'
 
         li.innerHTML = /*html*/`
             <div class="todo-left" onclick="toggleTask(${index})">
@@ -35,11 +41,11 @@ const taskRender = () => {
 
         listElement.appendChild(li)
     })
-
-    if(typeof lucide !== 'undefined') {
+    if(typeof lucide !== "undefined") {
         lucide.createIcons()
     }
 }
+
 
 const addTask = () => {
     const input = document.getElementById('taskInput')
@@ -47,6 +53,7 @@ const addTask = () => {
     if(input.value.trim() !== "") {
         taskData.push({text: input.value, completed: false})
         input.value = "";
+        saveToLocalStorage();
         taskRender();
     } else {
         Swal.fire({
@@ -60,6 +67,7 @@ const addTask = () => {
 
 const toggleTask = (index) => {
     taskData[index].completed = !taskData[index].completed
+    saveToLocalStorage();
     taskRender();
 }
 
@@ -72,9 +80,9 @@ const deleteTask = (index) => {
         targetItem.style.transform = 'translateX(50px)'
         setTimeout(() => {
             taskData.splice(index, 1)
+            saveToLocalStorage();
             taskRender()
         }, 300)
     }
 }
-
 taskRender();
